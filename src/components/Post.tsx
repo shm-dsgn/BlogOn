@@ -10,8 +10,8 @@ const Post = () => {
         </div>
         <div className=" w-3/5 flex flex-col justify-around">
           <h2 className="font-bold text-lg text-ellipsis line-clamp-2 ">Title of a blog post </h2>
-          <p className="text-gray-500 text-xs">
-            John Doe , <span>2023-06-21 13:26</span>
+          <p className="text-gray-500 text-xs font-semibold">
+            John Doe&nbsp; <span className=" font-normal">2023-06-21 13:26</span>
           </p>
           <p className=" text-sm text-ellipsis line-clamp-3 ">
             Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum

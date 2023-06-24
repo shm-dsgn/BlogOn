@@ -20,6 +20,7 @@ const Header = () => {
   const logout = () => {
     setCookies("access_token", "");
     window.localStorage.removeItem("userID");
+    window.localStorage.removeItem("userName");
     navigate("/login");
   };
 
