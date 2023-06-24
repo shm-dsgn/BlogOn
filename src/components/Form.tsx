@@ -1,4 +1,5 @@
-import React from "react";
+import { useState } from "react";
+import { PiEyeDuotone, PiEyeClosedDuotone } from "react-icons/pi";
 
 interface FormProps {
   username: string;
@@ -10,6 +11,7 @@ interface FormProps {
 }
 
 const Form = (props: FormProps) => {
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <div className="m-2">
       <h2 className="font-bold text-2xl text-center">{props.label}</h2>
@@ -40,18 +42,34 @@ const Form = (props: FormProps) => {
           >
             Password
           </label>
-          <input
-            className="shadow border rounded w-full p-3 text-gray-700 focus:outline-none focus:shadow-outline"
-            type="password"
-            placeholder="Enter Password"
-            id="password"
-            onChange={(event) => props.setPassword(event.target.value)}
-            value={props.password}
-          />
+          <div className="flex items-center">
+            <input
+              className="shadow border rounded w-full p-3 text-gray-700 focus:outline-none focus:shadow-outline"
+              type= {showPassword ? "text" : "password"}
+              placeholder="Enter Password"
+              id="password"
+              onChange={(event) => props.setPassword(event.target.value)}
+              value={props.password}
+            />
+
+            {!showPassword ? (
+              <PiEyeDuotone
+                className=" -mx-10 cursor-pointer text-blue-500"
+                fontSize={24}
+                onClick={() => setShowPassword(!showPassword)}
+              />
+            ) : (
+              <PiEyeClosedDuotone
+                className=" -mx-10 cursor-pointer text-blue-500"
+                fontSize={24}
+                onClick={() => setShowPassword(!showPassword)}
+              />
+            )}
+          </div>
         </div>
         <button
           type="submit"
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2 w-full"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2 w-full"
         >
           {props.label}
         </button>
