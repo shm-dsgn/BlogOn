@@ -33,18 +33,24 @@ const Header = () => {
       </h1>
       <nav className=" text-blue-500 flex gap-4">
         {!cookies.access_token || cookies.access_token === undefined ? (
-          <NavLink to="/login" style={navLinkStyles}>
-            Login
-          </NavLink>
+          <>
+            <NavLink to="/login" style={navLinkStyles}>
+              Login
+            </NavLink>
+            <NavLink to="/register" style={navLinkStyles}>
+              Register
+            </NavLink>
+          </>
         ) : (
-          <p onClick={logout} className=" cursor-pointer">Logout</p>
-        )}
-                {!cookies.access_token || cookies.access_token === undefined ? (
-        <NavLink to="/register" style={navLinkStyles}>
-        Register
-      </NavLink>
-        ) : (
-          <p>@{userName}</p>
+          <>
+            <NavLink to="/create" style={navLinkStyles}>
+              Cr.P
+            </NavLink>
+            <p onClick={logout} className=" cursor-pointer">
+              Logout
+            </p>
+            <p>@{userName}</p>
+          </>
         )}
       </nav>
     </header>
