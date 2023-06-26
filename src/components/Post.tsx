@@ -1,27 +1,47 @@
-const Post = () => {
+import { format } from "date-fns";
+import { Link } from "react-router-dom";
+
+type PostProps = {
+  title: string;
+  summary: string;
+  cover: string;
+  id: string;
+  content: string;
+  createdAt: string;
+  author: {
+    _id: string;
+    username: string;
+  };
+};
+
+const Post = (props: PostProps) => {
   return (
     <div className="flex gap-4 mb-4">
-        <div className=" w-2/5">
+      <div className=" w-2/5">
+        <Link to={`/post/${props.id}`}>
           <img
-            src="https://media.istockphoto.com/id/1322277517/photo/wild-grass-in-the-mountains-at-sunset.jpg?s=612x612&w=0&k=20&c=6mItwwFFGqKNKEAzv0mv6TaxhLN3zSE43bWmFN--J5w="
-            alt="random"
+            src={`http://localhost:3001/${props.cover}`}
+            alt="blog cover"
             className=" rounded-lg h-36 w-full object-cover"
           />
-        </div>
-        <div className=" w-3/5 flex flex-col justify-around">
-          <h2 className="font-bold text-lg text-ellipsis line-clamp-2 ">Title of a blog post </h2>
-          <p className="text-gray-500 text-xs font-semibold">
-            John Doe&nbsp; <span className=" font-normal">2023-06-21 13:26</span>
-          </p>
-          <p className=" text-sm text-ellipsis line-clamp-3 ">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum
-            dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Lorem ipsum dolor sit amet
-            consectetur adipisicing elit.
-          </p>
-        </div>
+        </Link>
       </div>
-  )
-}
+      <div className=" w-3/5 flex flex-col justify-around">
+        <Link to={`/post/${props.id}`}>
+          <h2 className="font-bold text-lg text-ellipsis line-clamp-2 ">
+            {props.title}
+          </h2>
+        </Link>
+        <p className="text-gray-500 text-xs font-semibold">
+          @{props.author.username}&nbsp;
+          <span className=" font-normal">
+            {format(new Date(props.createdAt), "MMM d, yyyy HH:mm")}
+          </span>
+        </p>
+        <p className=" text-sm text-ellipsis line-clamp-3 ">{props.summary}</p>
+      </div>
+    </div>
+  );
+};
 
-export default Post
+export default Post;
