@@ -3,10 +3,13 @@ import Form from "../components/Form";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const onSubmit = async (event: React.FormEvent<Element>) => {
     event.preventDefault();
@@ -29,6 +32,9 @@ const RegisterPage = () => {
               autoClose: 2000,
               position: "top-center",
             });
+            setTimeout(() => {
+              navigate("/login");
+            }, 2500);
           }
         });
     } catch (err) {
