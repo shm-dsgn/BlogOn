@@ -12,17 +12,19 @@ const LoginPage = () => {
   // eslint-disable-next-line
   const [_, setCookies] = useCookies(["access_token"]);
   const navigate = useNavigate();
+  const [spinner, setSpinner] = useState(false);
 
   const onSubmit = async (event: React.FormEvent<Element>) => {
     event.preventDefault();
-    // console.log("onSubmit login page", username, password);
     try {
+      setSpinner(true);
       await axios
         .post("https://shm-blogapp-api.onrender.com/auth/login", {
           username,
           password,
         })
         .then(function (response) {
+          setSpinner(false);
           if (response.data.type === "error") {
             toast.error(response.data.message, {
               autoClose: 2000,
@@ -45,6 +47,7 @@ const LoginPage = () => {
           }
         });
     } catch (err) {
+      setSpinner(false);
       console.error(err);
     }
   };
@@ -59,6 +62,7 @@ const LoginPage = () => {
         password={password}
         setPassword={setPassword}
         onSubmit={onSubmit}
+        spinner={spinner}
       />
     </>
   );

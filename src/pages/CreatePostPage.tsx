@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useGetUserID } from "../hooks/useGetUserID";
 import Editor from "../components/Editor";
 import { useCookies } from "react-cookie";
+import Spinner from "../components/Spinner";
 
 const CreatePostPage = () => {
   const [title, setTitle] = useState("");
@@ -13,12 +14,13 @@ const CreatePostPage = () => {
   const [content, setContent] = useState("");
   const [images, setImages] = useState<FileList | null>(null);
   const navigate = useNavigate();
-    // eslint-disable-next-line
-    const [cookies, _] = useCookies(["access_token"]);
+  // eslint-disable-next-line
+  const [cookies, _] = useCookies(["access_token"]);
+  const [spinner, setSpinner] = useState(false);
 
   const CreatePost = async (e: React.FormEvent<Element>) => {
     e.preventDefault();
-
+    setSpinner(true);
     const userID = useGetUserID();
 
     const data = new FormData();
@@ -33,9 +35,10 @@ const CreatePostPage = () => {
     try {
       await axios
         .post("https://shm-blogapp-api.onrender.com/post/create", data, {
-          headers: { authorization: cookies.access_token }
+          headers: { authorization: cookies.access_token },
         })
         .then(function (response) {
+          setSpinner(false);
           toast.success(response.data.message, {
             autoClose: 2000,
             position: "top-center",
@@ -45,6 +48,7 @@ const CreatePostPage = () => {
           }, 2500);
         });
     } catch (err) {
+      setSpinner(false);
       toast.error(
         "Blog Content too big due to images/other media/too much text. Reduce or modify accordingly. Or Server Error.",
         {
@@ -95,9 +99,10 @@ const CreatePostPage = () => {
         <Editor value={content} onChange={setContent} />
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline mt-2 w-full disabled:opacity-50"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline mt-2 w-full disabled:opacity-50 flex justify-center gap-4 items-center"
           disabled={!title || !summary || !content || !images}
         >
+          {spinner ? <Spinner color={"white"}/> : ""}
           Create Post
         </button>
       </form>

@@ -1,5 +1,6 @@
 import { Eye, EyeClosed } from "@phosphor-icons/react";
 import { useState } from "react";
+import Spinner from "./Spinner";
 
 interface FormProps {
   username: string;
@@ -8,6 +9,7 @@ interface FormProps {
   setPassword: (password: string) => void;
   label: string;
   onSubmit: (event: React.FormEvent) => void;
+  spinner: boolean;
 }
 
 const Form = (props: FormProps) => {
@@ -71,8 +73,9 @@ const Form = (props: FormProps) => {
         </div>
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline mt-2 w-full"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline mt-2 w-full flex gap-4 justify-center items-center"
         >
+          {props.spinner ? <Spinner color="white"/> : ""}
           {props.label}
         </button>
       </form>

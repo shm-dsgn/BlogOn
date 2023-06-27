@@ -1,6 +1,7 @@
 import Post from "../components/Post";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Spinner from "../components/Spinner";
 
 type BlogType = {
   // properties of a post
@@ -53,7 +54,7 @@ const Home = () => {
             />
           ))
         )
-      ): (<p>Loading...</p>)}
+      ): (<Spinner color={"blue"}/>)}
     </>
   );
 };

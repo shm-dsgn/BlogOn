@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useGetUserID } from "../hooks/useGetUserID";
 import { useCookies } from "react-cookie";
+import Spinner from "../components/Spinner";
 
 const EditPostPage = () => {
   const [title, setTitle] = useState("");
@@ -17,11 +18,14 @@ const EditPostPage = () => {
   const { id } = useParams();
   // eslint-disable-next-line
   const [cookies, _] = useCookies(["access_token"]);
+  const [spinner, setSpinner] = useState(false);
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get(`https://shm-blogapp-api.onrender.com/post/${id}`);
+        const response = await axios.get(
+          `https://shm-blogapp-api.onrender.com/post/${id}`
+        );
         setTitle(response.data.title);
         setSummary(response.data.summary);
         setContent(response.data.content);
@@ -35,6 +39,7 @@ const EditPostPage = () => {
 
   const UpdatePost = async (e: React.FormEvent<Element>) => {
     e.preventDefault();
+    setSpinner(true);
     const userID = useGetUserID();
 
     const data = new FormData();
@@ -54,6 +59,7 @@ const EditPostPage = () => {
           headers: { authorization: cookies.access_token },
         })
         .then(function (response) {
+          setSpinner(false);
           toast.success(response.data.message, {
             autoClose: 2000,
             position: "top-center",
@@ -63,6 +69,7 @@ const EditPostPage = () => {
           }, 2500);
         });
     } catch (err) {
+      setSpinner(false);
       toast.error(
         "Blog Content too big due to images/other media/too much text. Reduce or modify accordingly. Or Server Error.",
         {
@@ -121,9 +128,9 @@ const EditPostPage = () => {
           </Link>
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline mt-2 w-full disabled:opacity-50"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline mt-2 w-full disabled:opacity-50 flex justify-center items-center gap-4"
           >
-            Save
+            {spinner ? <Spinner color={"white"}/> : ""} Save
           </button>
         </div>
       </form>

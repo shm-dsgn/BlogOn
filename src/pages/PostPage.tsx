@@ -6,6 +6,7 @@ import { CaretCircleLeft, NotePencil, Trash } from "@phosphor-icons/react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useCookies } from "react-cookie";
+import Spinner from "../components/Spinner";
 
 type PostType = {
   // properties of a post
@@ -128,7 +129,7 @@ const PostPage = () => {
           </div>
         )
       ) : (
-        <p>Loading...</p>
+        <Spinner color={"blue"}/>
       )}
     </>
   );
