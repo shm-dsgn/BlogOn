@@ -10,7 +10,7 @@ const RegisterPage = () => {
 
   const onSubmit = async (event: React.FormEvent<Element>) => {
     event.preventDefault();
-    console.log("onSubmit regider page", username, password);
+    // console.log("onSubmit regider page", username, password);
 
     try {
       await axios
