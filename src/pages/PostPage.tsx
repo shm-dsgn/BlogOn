@@ -122,7 +122,7 @@ const PostPage = () => {
               className=" rounded-md w-full h-56 object-cover mb-4"
             />
             <p
-              className="text-black font-normal mt-4 w-full prose"
+              className="text-black font-normal mt-4 mb-8 w-full prose"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
           </div>

@@ -28,13 +28,20 @@ const LoginPage = () => {
               autoClose: 2000,
               position: "top-center",
             });
+          } else if (response.data.type === "success") {
+            toast.success(response.data.message, {
+              autoClose: 2000,
+              position: "top-center",
+            });
           }
 
           if (response.data.token) {
             setCookies("access_token", response.data.token);
             window.localStorage.setItem("userID", response.data.userID);
             window.localStorage.setItem("userName", response.data.username);
-            navigate("/");
+            setTimeout(() => {
+              navigate("/");
+            }, 2500);
           }
         });
     } catch (err) {
