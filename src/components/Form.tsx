@@ -1,5 +1,5 @@
+import { Eye, EyeClosed } from "@phosphor-icons/react";
 import { useState } from "react";
-import { PiEyeDuotone, PiEyeClosedDuotone } from "react-icons/pi";
 
 interface FormProps {
   username: string;
@@ -45,7 +45,7 @@ const Form = (props: FormProps) => {
           <div className="flex items-center">
             <input
               className="shadow border rounded w-full p-3 text-gray-700 focus:outline-none focus:shadow-outline"
-              type= {showPassword ? "text" : "password"}
+              type={showPassword ? "text" : "password"}
               placeholder="Enter Password"
               id="password"
               onChange={(event) => props.setPassword(event.target.value)}
@@ -53,15 +53,17 @@ const Form = (props: FormProps) => {
             />
 
             {!showPassword ? (
-              <PiEyeDuotone
+              <Eye
+                size={24}
                 className=" -mx-10 cursor-pointer text-blue-500"
-                fontSize={24}
+                weight="duotone"
                 onClick={() => setShowPassword(!showPassword)}
               />
             ) : (
-              <PiEyeClosedDuotone
+              <EyeClosed
+                size={24}
                 className=" -mx-10 cursor-pointer text-blue-500"
-                fontSize={24}
+                weight="duotone"
                 onClick={() => setShowPassword(!showPassword)}
               />
             )}

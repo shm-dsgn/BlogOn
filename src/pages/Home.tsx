@@ -23,7 +23,7 @@ const Home = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/post");
+        const response = await axios.get("https://shm-blogapp-api.onrender.com/post");
         setBlogs(response.data);
         setLoaded(true);
       } catch (err) {

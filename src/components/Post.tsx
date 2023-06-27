@@ -20,7 +20,7 @@ const Post = (props: PostProps) => {
       <div className=" w-2/5">
         <Link to={`/post/${props.id}`}>
           <img
-            src={`http://localhost:3001/${props.cover}`}
+            src={`https://shm-blogapp-api.onrender.com/${props.cover}`}
             alt="blog cover"
             className=" rounded-lg h-36 w-full object-cover"
           />
@@ -33,7 +33,7 @@ const Post = (props: PostProps) => {
           </h2>
         </Link>
         <p className="text-gray-500 text-xs font-semibold">
-          @{props.author.username}&nbsp;
+          @{props.author.username}&nbsp;&nbsp;
           <span className=" font-normal">
             {format(new Date(props.createdAt), "MMM d, yyyy HH:mm")}
           </span>

@@ -18,7 +18,7 @@ const LoginPage = () => {
     // console.log("onSubmit login page", username, password);
     try {
       await axios
-        .post("http://localhost:3001/auth/login", {
+        .post("https://shm-blogapp-api.onrender.com/auth/login", {
           username,
           password,
         })

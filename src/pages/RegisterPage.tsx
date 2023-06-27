@@ -14,7 +14,7 @@ const RegisterPage = () => {
 
     try {
       await axios
-        .post("http://localhost:3001/auth/register", {
+        .post("https://shm-blogapp-api.onrender.com/auth/register", {
           username,
           password,
         })

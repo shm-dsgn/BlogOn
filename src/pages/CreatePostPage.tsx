@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useGetUserID } from "../hooks/useGetUserID";
 import Editor from "../components/Editor";
+import { useCookies } from "react-cookie";
 
 const CreatePostPage = () => {
   const [title, setTitle] = useState("");
@@ -12,6 +13,8 @@ const CreatePostPage = () => {
   const [content, setContent] = useState("");
   const [images, setImages] = useState<FileList | null>(null);
   const navigate = useNavigate();
+    // eslint-disable-next-line
+    const [cookies, _] = useCookies(["access_token"]);
 
   const CreatePost = async (e: React.FormEvent<Element>) => {
     e.preventDefault();
@@ -29,7 +32,9 @@ const CreatePostPage = () => {
 
     try {
       await axios
-        .post("http://localhost:3001/post/create", data)
+        .post("https://shm-blogapp-api.onrender.com/post/create", data, {
+          headers: { authorization: cookies.access_token }
+        })
         .then(function (response) {
           toast.success(response.data.message, {
             autoClose: 2000,
@@ -41,7 +46,7 @@ const CreatePostPage = () => {
         });
     } catch (err) {
       toast.error(
-        "Blog Content too big due to images/other media/too much text. Reduce or modify accordingly.",
+        "Blog Content too big due to images/other media/too much text. Reduce or modify accordingly. Or Server Error.",
         {
           autoClose: 2000,
           position: "top-center",

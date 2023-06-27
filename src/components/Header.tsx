@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import { FilePlus, SignOut, User } from "@phosphor-icons/react";
+import logo from "../logo.png";
 
 interface NavLinkProps {
   isActive: boolean;
@@ -24,33 +26,47 @@ const Header = () => {
     navigate("/login");
   };
 
-  // console.log("cookies", !!cookies.access_token);
-
   return (
-    <header className="flex justify-between mb-12 items-center">
+    <header className="flex justify-between items-center mb-8 mt-2l">
       <h1 className="font-bold text-xl">
-        <NavLink to="/">Blog App</NavLink>
+        <NavLink to="/"><img src={logo} className=" w-12" alt="logo"/></NavLink>
       </h1>
       <nav className=" text-blue-500 flex gap-4">
         {!cookies.access_token || cookies.access_token === undefined ? (
           <>
-            <NavLink to="/login" style={navLinkStyles}>
+            <NavLink
+              to="/login"
+              style={navLinkStyles}
+              className="bg-blue-500 text-white py-2 px-2 rounded text-sm flex justify-center items-center"
+            >
               Login
             </NavLink>
-            <NavLink to="/register" style={navLinkStyles}>
+            <NavLink
+              to="/register"
+              style={navLinkStyles}
+              className="bg-blue-500 text-white py-2 px-2 rounded text-sm flex justify-center items-center"
+            >
               Register
             </NavLink>
           </>
         ) : (
-          <>
-            <NavLink to="/create" style={navLinkStyles}>
-              Cr.P
+          <div className="flex justify-center items-center gap-2">
+            <NavLink to="/create">
+              <button className="bg-green-500 hover:bg-green-700 text-white py-2 px-2 rounded focus:outline-none focus:shadow-outline text-xs flex justify-center items-center">
+                <FilePlus size={20} weight="bold" />
+              </button>
             </NavLink>
-            <p onClick={logout} className=" cursor-pointer">
-              Logout
-            </p>
-            <p>@{userName}</p>
-          </>
+            <button
+              onClick={logout}
+              className="bg-red-500 hover:bg-red-700 text-white py-2 px-2 rounded focus:outline-none focus:shadow-outline text-xs flex justify-center items-center"
+            >
+              <SignOut size={20} weight="bold" />
+            </button>
+            <div className="bg-blue-500 text-white py-2 px-2 rounded text-xs flex justify-center items-center">
+              <User size={20} weight="fill" />
+              &nbsp;{userName}
+            </div>
+          </div>
         )}
       </nav>
     </header>
