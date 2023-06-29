@@ -10,7 +10,7 @@ import EditPostPage from "./pages/EditPostPage";
 
 function App() {
   return (
-    <main className=" p-2 mx-auto my-0 max-w-2xl">
+    <main className=" p-2 mx-auto my-0 max-w-2xl font-inter">
       <Header />
       <Routes>
         <Route path="/" element={<Home/>} />
