@@ -19,7 +19,7 @@ const LoginPage = () => {
     try {
       setSpinner(true);
       await axios
-        .post("https://shm-blogapp-api.onrender.com/auth/login", {
+        .post(`${process.env.REACT_APP_API_URL}/auth/login`, {
           username,
           password,
         })
@@ -27,12 +27,12 @@ const LoginPage = () => {
           setSpinner(false);
           if (response.data.type === "error") {
             toast.error(response.data.message, {
-              autoClose: 2000,
+              autoClose: 1000,
               position: "top-center",
             });
           } else if (response.data.type === "success") {
             toast.success(response.data.message, {
-              autoClose: 2000,
+              autoClose: 1000,
               position: "top-center",
             });
           }
@@ -43,7 +43,7 @@ const LoginPage = () => {
             window.localStorage.setItem("userName", response.data.username);
             setTimeout(() => {
               navigate("/");
-            }, 2500);
+            }, 1500);
           }
         });
     } catch (err) {

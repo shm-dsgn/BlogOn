@@ -34,25 +34,25 @@ const CreatePostPage = () => {
 
     try {
       await axios
-        .post("https://shm-blogapp-api.onrender.com/post/create", data, {
+        .post(`${process.env.REACT_APP_API_URL}/post/create`, data, {
           headers: { authorization: cookies.access_token },
         })
         .then(function (response) {
           setSpinner(false);
           toast.success(response.data.message, {
-            autoClose: 2000,
+            autoClose: 1000,
             position: "top-center",
           });
           setTimeout(() => {
             navigate("/");
-          }, 2500);
+          }, 1500);
         });
     } catch (err) {
       setSpinner(false);
       toast.error(
         "Blog Content too big due to images/other media/too much text. Reduce or modify accordingly. Or Server Error.",
         {
-          autoClose: 2000,
+          autoClose: 1000,
           position: "top-center",
         }
       );

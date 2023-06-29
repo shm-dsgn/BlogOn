@@ -19,7 +19,7 @@ const RegisterPage = () => {
     try {
       setSpinner(true);
       await axios
-        .post("https://shm-blogapp-api.onrender.com/auth/register", {
+        .post(`${process.env.REACT_APP_API_URL}/auth/register`, {
           username,
           password,
         })
@@ -27,17 +27,17 @@ const RegisterPage = () => {
           setSpinner(false);
           if (res.data.type === "error") {
             toast.error(res.data.message, {
-              autoClose: 2000,
+              autoClose: 1000,
               position: "top-center",
             });
           } else if (res.data.type === "success") {
             toast.success(res.data.message, {
-              autoClose: 2000,
+              autoClose: 1000,
               position: "top-center",
             });
             setTimeout(() => {
               navigate("/login");
-            }, 2500);
+            }, 1500);
           }
         });
     } catch (err) {

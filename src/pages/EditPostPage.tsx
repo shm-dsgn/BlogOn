@@ -24,7 +24,7 @@ const EditPostPage = () => {
     const fetchPost = async () => {
       try {
         const response = await axios.get(
-          `https://shm-blogapp-api.onrender.com/post/${id}`
+          `${process.env.REACT_APP_API_URL}/post/${id}`
         );
         setTitle(response.data.title);
         setSummary(response.data.summary);
@@ -55,25 +55,25 @@ const EditPostPage = () => {
 
     try {
       await axios
-        .put("https://shm-blogapp-api.onrender.com/post/edit", data, {
+        .put(`${process.env.REACT_APP_API_URL}/post/edit`, data, {
           headers: { authorization: cookies.access_token },
         })
         .then(function (response) {
           setSpinner(false);
           toast.success(response.data.message, {
-            autoClose: 2000,
+            autoClose: 1000,
             position: "top-center",
           });
           setTimeout(() => {
             navigate(`/post/${id}`);
-          }, 2500);
+          }, 1500);
         });
     } catch (err) {
       setSpinner(false);
       toast.error(
         "Blog Content too big due to images/other media/too much text. Reduce or modify accordingly. Or Server Error.",
         {
-          autoClose: 2000,
+          autoClose: 1000,
           position: "top-center",
         }
       );
@@ -112,7 +112,7 @@ const EditPostPage = () => {
             src={
               images
                 ? URL.createObjectURL(images![0])
-                : `https://shm-blogapp-api.onrender.com/${savedCover}`
+                : `${savedCover}`
             }
             className=" rounded-lg w-48 h-24 object-cover"
             alt="preview of upload"

@@ -37,7 +37,7 @@ const PostPage = () => {
     try {
       const fetchPost = async () => {
         try {
-          const response = await axios.get(`https://shm-blogapp-api.onrender.com/post/${id}`);
+          const response = await axios.get(`${process.env.REACT_APP_API_URL}/post/${id}`);
           setPost(response.data);
           // console.log(response.data);
         } catch (err) {
@@ -55,21 +55,21 @@ const PostPage = () => {
   const handleDelete = async () => {
     try {
       await axios
-        .delete(`https://shm-blogapp-api.onrender.com/post/delete/${id}`, {
+        .delete(`${process.env.REACT_APP_API_URL}/post/delete/${id}`, {
           headers: { authorization: cookies.access_token },
         })
         .then(function (response) {
           toast.success(response.data.message, {
-            autoClose: 2000,
+            autoClose: 1000,
             position: "top-center",
           });
           setTimeout(() => {
             navigate(`/`);
-          }, 2500);
+          }, 1500);
         });
     } catch (err) {
       toast.error("Server Error. Try again later.", {
-        autoClose: 2000,
+        autoClose: 1000,
         position: "top-center",
       });
       console.error(err);
@@ -118,7 +118,7 @@ const PostPage = () => {
               </div>
             )}
             <img
-              src={`https://shm-blogapp-api.onrender.com/${post.cover}`}
+              src={`${post.cover}`}
               alt="Blog cover"
               className=" rounded-md w-full h-56 object-cover mb-4"
             />

@@ -20,7 +20,7 @@ const Post = (props: PostProps) => {
       <div className=" w-2/5">
         <Link to={`/post/${props.id}`}>
           <img
-            src={`https://shm-blogapp-api.onrender.com/${props.cover}`}
+            src={`${props.cover}`}
             alt="blog cover"
             className=" rounded-lg h-36 w-full object-cover"
           />
