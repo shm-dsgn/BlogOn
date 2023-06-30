@@ -41,7 +41,7 @@ const LoginPage = () => {
 
           if (response.data.token) {
             const expiresDate = new Date();
-            const expirationTime = 10 * 1000; // 1 min
+            const expirationTime = 7200000; // 2 hr
             expiresDate.setTime(expiresDate.getTime() + expirationTime);
             setCookies("access_token", response.data.token,{
               expires: expiresDate
