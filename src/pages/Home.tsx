@@ -1,5 +1,4 @@
-import Post from "../components/Post";
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import axios from "axios";
 import Spinner from "../components/Spinner";
 
@@ -13,6 +12,8 @@ type BlogType = {
   createdAt: string;
   author: string
 }[];
+
+const LazyPost = lazy(() => import("../components/Post"));
 
 const Home = () => {
   const [blogs, setBlogs] = useState<BlogType>([]);
@@ -38,8 +39,9 @@ const Home = () => {
         blogs.length === 0 ? (
           <div className=" text-center">No blogs yet... Write up one now!!</div>
         ) : (
-          blogs.map((post) => (
-            <Post
+          <Suspense fallback={<Spinner color={"blue"} />}>
+          {blogs.map((post) => (
+            <LazyPost
               key={post._id}
               title={post.title}
               summary={post.summary}
@@ -49,7 +51,8 @@ const Home = () => {
               createdAt={post.createdAt}
               author={post.author}
             />
-          ))
+          ))}
+          </Suspense>
         )
       ): (<Spinner color={"blue"}/>)}
     </>

@@ -37,7 +37,9 @@ const PostPage = () => {
     try {
       const fetchPost = async () => {
         try {
-          const response = await axios.get(`${process.env.REACT_APP_API_URL}/post/${id}`);
+          const response = await axios.get(
+            `${process.env.REACT_APP_API_URL}/post/${id}`
+          );
           setPost(response.data);
           // console.log(response.data);
         } catch (err) {
@@ -85,9 +87,14 @@ const PostPage = () => {
           <div className="flex flex-col justify-center items-center">
             <ToastContainer pauseOnFocusLoss={false} />
 
-            <Link to="/">
-              <CaretCircleLeft size={36} className=" text-slate-600" />
-            </Link>
+            <CaretCircleLeft
+              size={36}
+              className=" text-slate-600 cursor-pointer"
+              onClick={() => {
+                navigate(-1);
+              }}
+            />
+
             <br />
             <h1 className="font-bold text-3xl text-center">{post.title}</h1>
             <p className="text-gray-500 text-sm font-semibold mt-4">
@@ -99,19 +106,22 @@ const PostPage = () => {
                 {format(new Date(post.updatedAt), "MMM d, yyyy HH:mm")})
               </p>
             )}
-            <p className=" text-black text-sm font-semibold mt-2 mb-4">
-              by {post.author.username}
-            </p>
+            <Link to={`/post/myprofile/${post.author._id}`}>
+              <p className=" text-black text-sm font-semibold mt-2 mb-4">
+                by {post.author.username}
+              </p>
+            </Link>
             {currentUserId === post.author._id && (
               <div className="flex gap-4">
                 <Link to={`/post/edit/${post._id}`}>
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded focus:outline-none focus:shadow-outline mt-2 mb-4 text-sm flex justify-center items-center gap-1">
+                  <button className="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded focus:outline-none focus:shadow-outline mt-2 mb-4 text-sm flex justify-center items-center gap-1" title="Edit Blog">
                     <NotePencil size={24} />
                   </button>
                 </Link>
                 <button
                   onClick={handleDelete}
                   className="bg-red-500 hover:bg-red-700 text-white p-2 rounded focus:outline-none focus:shadow-outline mt-2 mb-4"
+                  title="Delete Blog"
                 >
                   <Trash size={24} />
                 </button>
@@ -129,7 +139,7 @@ const PostPage = () => {
           </div>
         )
       ) : (
-        <Spinner color={"blue"}/>
+        <Spinner color={"blue"} />
       )}
     </>
   );
