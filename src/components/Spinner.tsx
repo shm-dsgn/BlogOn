@@ -1,13 +1,16 @@
+import { SpinnerGap } from "@phosphor-icons/react";
+
 type SpinnerProps = {
   color: string;
 };
+
 const Spinner = (props: SpinnerProps) => {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center animate-spin">
       {props.color === "white" ? (
-        <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white"></div>
+        <SpinnerGap size={24} color="#ffffff" weight="bold"/>
       ) : (
-        <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-blue-500"></div>
+        <SpinnerGap size={24} color="#3B82F6" weight="bold"/>
       )}
     </div>
   );

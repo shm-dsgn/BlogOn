@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useClearUserDetails from "../hooks/useClearUserDetails";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -12,6 +13,7 @@ const LoginPage = () => {
   // eslint-disable-next-line
   const [_, setCookies] = useCookies(["access_token"]);
   const navigate = useNavigate();
+  const clearUser = useClearUserDetails();
   const [spinner, setSpinner] = useState(false);
 
   const onSubmit = async (event: React.FormEvent<Element>) => {
@@ -38,9 +40,17 @@ const LoginPage = () => {
           }
 
           if (response.data.token) {
-            setCookies("access_token", response.data.token);
+            const expiresDate = new Date();
+            const expirationTime = 10 * 1000; // 1 min
+            expiresDate.setTime(expiresDate.getTime() + expirationTime);
+            setCookies("access_token", response.data.token,{
+              expires: expiresDate
+            });
             window.localStorage.setItem("userID", response.data.userID);
             window.localStorage.setItem("userName", response.data.username);
+            setTimeout(() => {
+              clearUser();
+            }, expirationTime)
             setTimeout(() => {
               navigate("/");
             }, 1500);
