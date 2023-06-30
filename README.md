@@ -1,4 +1,4 @@
-<img src='https://drive.google.com/uc?id=10aEwKjOdN8nxq_IRALMt8WQz-qc8OTce' width=72px/>
+<img src='https://drive.google.com/uc?id=10aEwKjOdN8nxq_IRALMt8WQz-qc8OTce' width=108px/>
 
 # Blog App by shm.
 
@@ -6,11 +6,15 @@ A simple blog app that lets users create blog posts with images, edit them and d
 
 [Live Website Link](https://shm-blog-app.onrender.com)
 
+You can see the backend/server code here: [Server/API repository](https://github.com/shm-dsgn/blog-api)
+
 [![CodeFactor](https://www.codefactor.io/repository/github/shm-dsgn/blogapp/badge)](https://www.codefactor.io/repository/github/shm-dsgn/blogapp)
 
 
 ## Tech Stack
-  
+
+MERN Stack: 
+
 ![MongoDB](https://img.shields.io/badge/-MongoDB-22272e?logo=mongodb) ![Express](https://img.shields.io/badge/-Express-22272e?logo=express) ![React](https://img.shields.io/badge/-React-22272e?logo=react) ![Node.js](https://img.shields.io/badge/-Node.js-22272e?logo=node.js)
 
 ## Technologies Used
@@ -70,3 +74,5 @@ This will launch the application on a local development server, typically at [ht
 2. **Login/Register** : A user can register with their username and password and then login to the website to create their own blog posts.
 3. **Create Post** : A user , when signed in, can create a post by clicking on the 'Create Post' button and provide a title, a summary, a cover photo and the content of the blog into a form.
 4. **Delete Post** : A user when signed in, can also delete the posts that were created by the same user.
+5. **Edit Post** : A user can edit their posts by clicking on the 'Edit' button on the post card and can edit the title, summary, cover photo and the content of the blog.
+6. **My Profile** : A user can see their profile by clicking on the 'My Profile' button and can see all the posts created by them.
