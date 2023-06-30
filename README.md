@@ -1,4 +1,4 @@
-<img src='./src/logo.png' width=72px/>
+<img src='https://drive.google.com/uc?id=10aEwKjOdN8nxq_IRALMt8WQz-qc8OTce' width=72px/>
 
 # Blog App by shm.
 
