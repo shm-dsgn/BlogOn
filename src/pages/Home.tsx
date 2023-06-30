@@ -11,10 +11,7 @@ type BlogType = {
   content: string;
   cover: string;
   createdAt: string;
-  author: {
-    _id: string;
-    username: string;
-  };
+  author: string
 }[];
 
 const Home = () => {

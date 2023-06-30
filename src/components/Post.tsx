@@ -8,10 +8,7 @@ type PostProps = {
   id: string;
   content: string;
   createdAt: string;
-  author: {
-    _id: string;
-    username: string;
-  };
+  author: string
 };
 
 const Post = (props: PostProps) => {
@@ -32,12 +29,9 @@ const Post = (props: PostProps) => {
             {props.title}
           </h2>
         </Link>
-        <p className="text-gray-500 text-xs font-semibold">
-          @{props.author.username}&nbsp;&nbsp;
-          <span className=" font-normal">
-            {format(new Date(props.createdAt), "MMM d, yyyy HH:mm")}
-          </span>
-        </p>
+        <span className="text-gray-500 text-xs font-normal">
+          {format(new Date(props.createdAt), "MMM d, yyyy HH:mm")}
+        </span>
         <p className=" text-sm text-ellipsis line-clamp-3 ">{props.summary}</p>
       </div>
     </div>
