@@ -49,13 +49,10 @@ const CreatePostPage = () => {
         });
     } catch (err) {
       setSpinner(false);
-      toast.error(
-        "Blog Content too big due to images/other media/too much text. Reduce or modify accordingly. Or Server Error.",
-        {
-          autoClose: 1000,
-          position: "top-center",
-        }
-      );
+      toast.error("Server error. Try again later.", {
+        autoClose: 1000,
+        position: "top-center",
+      });
       console.error(err);
     }
   };
@@ -102,7 +99,7 @@ const CreatePostPage = () => {
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline mt-2 w-full disabled:opacity-50 flex justify-center gap-4 items-center"
           disabled={!title || !summary || !content || !images}
         >
-          {spinner ? <Spinner color={"white"}/> : ""}
+          {spinner ? <Spinner color={"white"} /> : ""}
           Create Post
         </button>
       </form>
