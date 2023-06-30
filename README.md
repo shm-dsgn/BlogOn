@@ -1,3 +1,5 @@
+<img src='./src/logo.png' width=72px/>
+
 # Blog App by shm.
 
 A simple blog app that lets users create blog posts with images, edit them and delete them.
