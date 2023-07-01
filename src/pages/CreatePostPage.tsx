@@ -92,7 +92,8 @@ const CreatePostPage = () => {
             />
           </div>
         )}
-
+        <p className=" text-xs text-gray-500">Suggestion: Try to upload a landscape oriented image for better outcome.</p>
+          
         <Editor value={content} onChange={setContent} />
         <button
           type="submit"
