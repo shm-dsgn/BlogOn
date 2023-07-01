@@ -52,7 +52,7 @@ cd blogApp
 REACT_APP_API_URL = https://shm-blogapp-api.onrender.com
 ```
 
-1. In the project directory, you can run `npm install` to install the project dependencies.
+5. In the project directory, you can run `npm install` to install the project dependencies.
 
 ```bash
 npm install
