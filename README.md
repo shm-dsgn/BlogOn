@@ -2,7 +2,7 @@
 
 # Blog App by shm.
 
-A simple blog app that lets users create blog posts with images, edit them and delete them.
+A simple blog app that lets users create blog posts with images, view them, edit them and delete them.
 
 [Live Website Link](https://shm-blog-app.onrender.com)
 
