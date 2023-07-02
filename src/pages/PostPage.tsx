@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { format } from "date-fns";
-import { CaretCircleLeft, NotePencil, Trash } from "@phosphor-icons/react";
+import {
+  ArrowUpRight,
+  NotePencil,
+  Share,
+  Trash,
+} from "@phosphor-icons/react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useCookies } from "react-cookie";
@@ -86,52 +91,63 @@ const PostPage = () => {
         ) : (
           <div className="flex flex-col justify-center items-center">
             <ToastContainer pauseOnFocusLoss={false} />
-
-            <CaretCircleLeft
-              size={36}
-              className=" text-slate-600 cursor-pointer"
-              onClick={() => {
-                navigate(-1);
-              }}
-            />
-
-            <br />
             <h1 className="font-bold text-3xl text-center">{post.title}</h1>
             <p className="text-gray-500 text-sm font-semibold mt-4">
               {format(new Date(post.createdAt), "MMM d, yyyy HH:mm")}
             </p>
-            {post.createdAt !== post.updatedAt && (
-              <p className="text-gray-600 text-xs font-medium">
-                (Edited on{" "}
-                {format(new Date(post.updatedAt), "MMM d, yyyy HH:mm")})
-              </p>
-            )}
             <Link to={`/post/myprofile/${post.author._id}`}>
-              <p className=" text-black text-sm font-semibold mt-2 mb-4">
-                by {post.author.username}
+              <p className=" group text-black text-sm font-semibold mt-2 mb-4 inline-block">
+                by {post.author.username}{" "}
+                <ArrowUpRight
+                  size={16}
+                  className=" hidden group-hover:inline-block"
+                />
               </p>
             </Link>
-            {currentUserId === post.author._id && (
-              <div className="flex gap-4">
-                <Link to={`/post/edit/${post._id}`}>
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded focus:outline-none focus:shadow-outline mt-2 mb-4 text-sm flex justify-center items-center gap-1" title="Edit Blog">
-                    <NotePencil size={24} />
+
+            <div className="flex gap-3">
+              {currentUserId === post.author._id && (
+                <>
+                  <Link to={`/post/edit/${post._id}`}>
+                    <button
+                      className=" text-gray-500 p-2 rounded mt-2 mb-4 hover:text-black"
+                      title="Edit Blog"
+                    >
+                      <NotePencil size={24} />
+                    </button>
+                  </Link>
+                  <button
+                    onClick={handleDelete}
+                    className=" text-gray-500 p-2 rounded mt-2 mb-4 hover:text-black"
+                    title="Delete Blog"
+                  >
+                    <Trash size={24} />
                   </button>
-                </Link>
-                <button
-                  onClick={handleDelete}
-                  className="bg-red-500 hover:bg-red-700 text-white p-2 rounded focus:outline-none focus:shadow-outline mt-2 mb-4"
-                  title="Delete Blog"
-                >
-                  <Trash size={24} />
-                </button>
-              </div>
-            )}
+                </>
+              )}
+              <button
+                onClick={() => {
+                  window.navigator.clipboard.writeText(window.location.href);
+                  toast.success("Blog URL copied successfully.", {
+                    autoClose: 1000,
+                    position: "top-center",
+                  });
+                }}
+                className=" text-gray-500 p-2 rounded hover:text-black mt-2 mb-4"
+                title="Share Blog"
+              >
+                <Share size={24} />
+              </button>
+            </div>
+
             <img
               src={`${post.cover}`}
               alt="Blog cover"
-              className=" rounded-md w-full h-56 object-cover mb-4"
+              className=" rounded-md w-full h-72 object-cover mb-4"
             />
+            <p className="text-gray-500 text-sm font-normal mt-2 mb-4 italic">
+              {post.summary}
+            </p>
             <p
               className="text-black font-normal mt-4 mb-8 w-full prose"
               dangerouslySetInnerHTML={{ __html: post.content }}

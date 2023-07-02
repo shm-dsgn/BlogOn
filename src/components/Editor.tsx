@@ -4,7 +4,6 @@ import "react-quill/dist/quill.snow.css";
 const modules = {
   toolbar: [
     [{ header: [1, 2, 3, 4, false] }],
-    [{ size: ["small", false, "large", "huge"] }],
     ["bold", "italic", "underline", "strike", "blockquote"],
     [{ script: "sub" }, { script: "super" }],
     [
@@ -30,7 +29,6 @@ const formats = [
   "indent",
   "link",
   "image",
-  "size",
   "color",
   "background",
   "script",
