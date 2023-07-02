@@ -50,7 +50,7 @@ const MyPostsPage = () => {
         {username}'s Profile
       </div>
 
-      <div className=" text-xl font-semibold mb-8 text-center underline">
+      <div className=" text-xl font-semibold mb-8 underline">
         Created Blogs
       </div>
       {isLoaded ? (
