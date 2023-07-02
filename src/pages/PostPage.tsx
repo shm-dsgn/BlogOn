@@ -106,7 +106,7 @@ const PostPage = () => {
             </Link>
 
             <div className="flex gap-3">
-              {currentUserId === post.author._id && (
+              {currentUserId === post.author._id && cookies.access_token && (
                 <>
                   <Link to={`/post/edit/${post._id}`}>
                     <button
