@@ -60,7 +60,7 @@ const TextToSpeech = () => {
   };
 
   const handleVoiceChange = (event: any) => {
-    const voices = window.speechSynthesis.getVoices().slice(0, 5);
+    const voices = window.speechSynthesis.getVoices();
     setVoice(voices.find((v) => v.name === event.target.value));
   };
 
@@ -92,14 +92,11 @@ const TextToSpeech = () => {
         onChange={handleVoiceChange}
         className="mb-2 text-xs text-white bg-gray-500 focus:outline-none w-1/3 rounded-md ml-3 p-1"
       >
-        {window.speechSynthesis
-          .getVoices()
-          .slice(0, 5)
-          .map((voice) => (
-            <option key={voice.name} value={voice.name}>
-              {voice.name}
-            </option>
-          ))}
+        {window.speechSynthesis.getVoices().map((voice) => (
+          <option key={voice.name} value={voice.name}>
+            {voice.name}
+          </option>
+        ))}
       </select>
     </div>
   );
