@@ -23,14 +23,14 @@ const Post = (props: PostProps) => {
           />
         </div>
         <div className=" w-3/5 flex flex-col justify-around">
-          <h2 className="font-bold text-lg text-ellipsis line-clamp-2 ">
+          <h2 className="font-bold text-sm text-ellipsis line-clamp-2 sm:text-lg">
             {props.title}
           </h2>
 
           <span className="text-gray-500 text-xs font-normal">
             {format(new Date(props.createdAt), "MMM d, yyyy HH:mm")}
           </span>
-          <p className=" text-sm text-ellipsis line-clamp-3 ">
+          <p className=" text-xs text-ellipsis line-clamp-3 sm:text-sm">
             {props.summary}
           </p>
         </div>

@@ -4,6 +4,7 @@ import axios from "axios";
 import { format } from "date-fns";
 import {
   ArrowUpRight,
+  Headphones,
   NotePencil,
   Share,
   Trash,
@@ -12,6 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useCookies } from "react-cookie";
 import Spinner from "../components/Spinner";
+import TextToSpeech from "../components/TextToSpeech";
 
 type PostType = {
   // properties of a post
@@ -37,6 +39,7 @@ const PostPage = () => {
   const currentUserId = localStorage.getItem("userID");
   // eslint-disable-next-line
   const [cookies, _] = useCookies(["access_token"]);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     try {
@@ -46,7 +49,6 @@ const PostPage = () => {
             `${process.env.REACT_APP_API_URL}/post/${id}`
           );
           setPost(response.data);
-          // console.log(response.data);
         } catch (err) {
           console.error(err);
         }
@@ -91,7 +93,9 @@ const PostPage = () => {
         ) : (
           <div className="flex flex-col justify-center items-center">
             <ToastContainer pauseOnFocusLoss={false} />
-            <h1 className="font-bold text-3xl text-center">{post.title}</h1>
+            <h1 className="font-bold text-xl text-center sm:text-3xl">
+              {post.title}
+            </h1>
             <p className="text-gray-500 text-sm font-semibold mt-4">
               {format(new Date(post.createdAt), "MMM d, yyyy HH:mm")}
             </p>
@@ -126,6 +130,15 @@ const PostPage = () => {
                 </>
               )}
               <button
+                onClick={() => setShow(!show)}
+                className={` p-2 rounded mt-2 mb-4 hover:text-black ${
+                  show ? "text-black" : "text-gray-500"
+                }`}
+                title="Listen to blog"
+              >
+                <Headphones size={24} />
+              </button>
+              <button
                 onClick={() => {
                   window.navigator.clipboard.writeText(window.location.href);
                   toast.success("Blog URL copied successfully.", {
@@ -139,16 +152,17 @@ const PostPage = () => {
                 <Share size={24} />
               </button>
             </div>
-
+            {show && <TextToSpeech />}
             <img
               src={`${post.cover}`}
               alt="Blog cover"
-              className=" rounded-md w-full h-72 object-cover mb-4"
+              className=" rounded-md w-full h-48 object-cover mb-4 sm:h-72"
             />
             <p className="text-gray-500 text-sm font-normal mt-2 mb-4 italic">
               {post.summary}
             </p>
             <p
+              id="content"
               className="text-black font-normal mt-4 mb-8 w-full prose"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
