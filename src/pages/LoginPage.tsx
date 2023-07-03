@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useRef, useState, RefObject } from "react";
 import Form from "../components/Form";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -14,8 +15,42 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [spinner, setSpinner] = useState(false);
 
+  const captchaRef: RefObject<any> = useRef();
+  const SITE_KEY = process.env.REACT_APP_reCAPTCHA_SITE_KEY as string;
+  const SECRET_KEY = process.env.REACT_APP_reCAPTCHA_SECRET_KEY;
+
   const onSubmit = async (event: React.FormEvent<Element>) => {
     event.preventDefault();
+
+    let token = captchaRef.current.getValue();
+    captchaRef.current.reset();
+
+    if (!token) {
+      toast.error("Please verify you are not a robot", {
+        autoClose: 1000,
+        position: "top-center",
+      });
+      return;
+    } else {
+      try {
+        await axios
+          .post(
+            `https://www.google.com/recaptcha/api/siteverify?secret=${SECRET_KEY}&response=${token}`
+          )
+          .then(function (response) {
+            if (!response.data.success) {
+              toast.error("Please verify you are not a robot", {
+                autoClose: 1000,
+                position: "top-center",
+              });
+              return;
+            }
+          });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
     try {
       setSpinner(true);
       await axios
@@ -41,8 +76,8 @@ const LoginPage = () => {
             const expiresDate = new Date();
             const expirationTime = 60 * 60 * 1000; // 1 hr
             expiresDate.setTime(expiresDate.getTime() + expirationTime);
-            setCookies("access_token", response.data.token,{
-              expires: expiresDate
+            setCookies("access_token", response.data.token, {
+              expires: expiresDate,
             });
             window.localStorage.setItem("userID", response.data.userID);
             window.localStorage.setItem("userName", response.data.username);
@@ -68,7 +103,9 @@ const LoginPage = () => {
         setPassword={setPassword}
         onSubmit={onSubmit}
         spinner={spinner}
-      />
+      >
+        <ReCAPTCHA className="recaptcha" sitekey={SITE_KEY} ref={captchaRef} />
+      </Form>
     </>
   );
 };

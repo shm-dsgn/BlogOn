@@ -10,6 +10,7 @@ interface FormProps {
   label: string;
   onSubmit: (event: React.FormEvent) => void;
   spinner: boolean;
+  children?: React.ReactNode;
 }
 
 const Form = (props: FormProps) => {
@@ -71,11 +72,12 @@ const Form = (props: FormProps) => {
             )}
           </div>
         </div>
+        {props.children}
         <button
           type="submit"
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline mt-2 w-full flex gap-4 justify-center items-center"
         >
-          {props.spinner ? <Spinner color="white"/> : ""}
+          {props.spinner ? <Spinner color="white" /> : ""}
           {props.label}
         </button>
       </form>
