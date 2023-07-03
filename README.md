@@ -8,7 +8,7 @@ A simple blog app that lets users create blog posts with images, view them, edit
 
 You can see the backend/server code here: [Server/API repository](https://github.com/shm-dsgn/blog-api)
 
-[![CodeFactor](https://www.codefactor.io/repository/github/shm-dsgn/blogapp/badge)](https://www.codefactor.io/repository/github/shm-dsgn/blogapp)
+[![CodeFactor](https://www.codefactor.io/repository/github/shm-dsgn/blogon/badge)](https://www.codefactor.io/repository/github/shm-dsgn/blogon)
 
 ## Tech Stack
 
