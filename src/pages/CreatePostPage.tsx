@@ -39,13 +39,20 @@ const CreatePostPage = () => {
         })
         .then(function (response) {
           setSpinner(false);
-          toast.success(response.data.message, {
-            autoClose: 1000,
-            position: "top-center",
-          });
-          setTimeout(() => {
-            navigate("/");
-          }, 1500);
+          if (response.data.type === "error") {
+            toast.error(response.data.message, {
+              autoClose: 1000,
+              position: "top-center",
+            });
+          } else {
+            toast.success(response.data.message, {
+              autoClose: 1000,
+              position: "top-center",
+            });
+            setTimeout(() => {
+              navigate("/");
+            }, 1500);
+          }
         });
     } catch (err) {
       setSpinner(false);
@@ -92,8 +99,11 @@ const CreatePostPage = () => {
             />
           </div>
         )}
-        <p className=" text-xs text-gray-500">Suggestion: Try to upload a landscape oriented image for better outcome.</p>
-          
+        <p className=" text-xs text-gray-500">
+          Suggestion: Try to upload a landscape oriented image for better
+          outcome.
+        </p>
+
         <Editor value={content} onChange={setContent} />
         <button
           type="submit"
@@ -103,6 +113,9 @@ const CreatePostPage = () => {
           {spinner ? <Spinner color={"white"} /> : ""}
           Create Post
         </button>
+        {spinner && <p className=" text-xs text-gray-500">
+          Checking for toxicity in your post. This may take a while...
+        </p>}
       </form>
     </>
   );

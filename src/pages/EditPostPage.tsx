@@ -118,7 +118,10 @@ const EditPostPage = () => {
             alt="preview of upload"
           />
         </div>
-
+        <p className=" text-xs text-gray-500">
+          Suggestion: Try to upload a landscape oriented image for better
+          outcome.
+        </p>
         <Editor value={content} onChange={setContent} />
         <div className=" gap-4 flex justify-between">
           <Link to={`/post/${id}`}>
@@ -133,6 +136,9 @@ const EditPostPage = () => {
             {spinner ? <Spinner color={"white"}/> : ""} Save
           </button>
         </div>
+        {spinner && <p className=" text-xs text-gray-500">
+          Checking for toxicity in your post. This may take a while...
+        </p>}
       </form>
     </>
   );

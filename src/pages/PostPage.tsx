@@ -122,7 +122,7 @@ const PostPage = () => {
                   </Link>
                   <button
                     onClick={handleDelete}
-                    className=" text-gray-500 p-2 rounded mt-2 mb-4 hover:text-black"
+                    className=" text-gray-500 p-2 rounded mt-2 mb-4 hover:text-red-600"
                     title="Delete Blog"
                   >
                     <Trash size={24} />
