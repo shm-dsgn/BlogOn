@@ -59,10 +59,10 @@ const TextToSpeech = () => {
     synth.cancel();
   };
 
-  const handleVoiceChange = (event: any) => {
-    const voices = window.speechSynthesis.getVoices();
-    setVoice(voices.find((v) => v.name === event.target.value));
-  };
+  // const handleVoiceChange = (event: any) => {
+  //   const voices = window.speechSynthesis.getVoices();
+  //   setVoice(voices.find((v) => v.name === event.target.value));
+  // };
 
   return (
     <div className="flex items-center justify-center">
@@ -87,17 +87,17 @@ const TextToSpeech = () => {
       >
         <Stop size={24} />
       </button>
-      <select
+      {/* <select
         value={voice?.name}
         onChange={handleVoiceChange}
-        className="mb-2 text-xs text-white bg-gray-500 focus:outline-none w-1/3 rounded-md ml-3 p-1"
+        className="mb-2 text-xs text-gray-600 bg-white focus:outline-none  rounded-md ml-3 p-0.5 hidden sm:block border-2 border-gray-500"
       >
         {window.speechSynthesis.getVoices().map((voice) => (
           <option key={voice.name} value={voice.name}>
             {voice.name}
           </option>
         ))}
-      </select>
+      </select> */}
     </div>
   );
 };
