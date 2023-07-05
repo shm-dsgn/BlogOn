@@ -5,6 +5,11 @@
   "dependencies": {
     "@phosphor-icons/react": "^2.0.10",
     "@tailwindcss/typography": "^0.5.9",
+    "@tensorflow-models/coco-ssd": "^2.2.2",
+    "@tensorflow/tfjs-backend-cpu": "^4.8.0",
+    "@tensorflow/tfjs-backend-webgl": "^4.8.0",
+    "@tensorflow/tfjs-converter": "^4.8.0",
+    "@tensorflow/tfjs-core": "^4.8.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
