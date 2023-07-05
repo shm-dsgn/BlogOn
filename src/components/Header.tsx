@@ -30,8 +30,9 @@ const Header = () => {
   return (
     <header className="flex justify-between items-center mb-8 mt-2l">
       <h1 className="font-bold text-xl">
-        <NavLink to="/">
+        <NavLink to="/" className=" flex justify-center items-center">
           <img src={logo} className=" w-12" alt="logo" title="Home" />
+          <p className=" text-base">BlogOn</p>
         </NavLink>
       </h1>
       <nav className=" text-blue-500 flex gap-4">
@@ -69,7 +70,10 @@ const Header = () => {
               <SignOut size={20} weight="bold" />
             </button>
             <NavLink to={`/post/myprofile/${userID}`}>
-              <div className="bg-blue-500 text-white py-2 px-2 rounded text-xs flex justify-center items-center" title="My Profile">
+              <div
+                className="bg-blue-500 text-white py-2 px-2 rounded text-xs flex justify-center items-center"
+                title="My Profile"
+              >
                 <User size={20} weight="fill" />
                 &nbsp;{userName}
               </div>

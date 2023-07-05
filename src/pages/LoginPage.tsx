@@ -35,7 +35,8 @@ const LoginPage = () => {
       try {
         await axios
           .post(
-            `https://www.google.com/recaptcha/api/siteverify?secret=${SECRET_KEY}&response=${token}`
+            `${process.env.REACT_APP_API_URL}/auth/verify-captcha`,
+            { token, SECRET_KEY },
           )
           .then(function (response) {
             if (!response.data.success) {

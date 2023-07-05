@@ -83,7 +83,9 @@ const WebcamCapture = (props: PredictionProps) => {
 
     if (streamRef.current) {
       streamRef.current.getTracks().forEach((track) => {
-        track.stop();
+        if (track.readyState === "live") {
+          track.stop();
+        }
       });
     }
     setIsPredicting(false);
@@ -96,9 +98,17 @@ const WebcamCapture = (props: PredictionProps) => {
         Identity Verification
       </p>
       {isVerified ? (
-        <p className="flex justify-center items-center">Verified <ShieldCheck size={36} color="#04d600" weight="fill" /></p>
+        <p className="flex justify-center items-center">
+          Verified <ShieldCheck size={36} color="#04d600" weight="fill" />
+        </p>
       ) : (
         <div>
+          <p className=" text-sm">Few points to remember:</p>
+          <ul className="list-disc list-inside text-sm">
+            <li>Make sure your face is clearly visible.</li>
+            <li>Make sure there is no one else in the frame.</li>
+            <li>Make sure there is enough light in the room.</li>
+          </ul>
           <div className="flex justify-center gap-4">
             <button
               onClick={startWebcam}
