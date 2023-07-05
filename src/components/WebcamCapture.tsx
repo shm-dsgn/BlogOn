@@ -65,7 +65,7 @@ const WebcamCapture = (props: PredictionProps) => {
       });
       return;
     } else {
-      if (predictions[0].class === "person" && predictions[0].score > 0.85) {
+      if (predictions[0].class === "person" && predictions[0].score >= 0.9) {
         props.setScore(predictions[0].score);
         setIsVerified(true);
         toast.success("Identity Verified", {

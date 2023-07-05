@@ -19,6 +19,8 @@ MERN Stack:
 ## Technologies Used
 
 - **TypeScript**
+- **TensorFlow JS** (for human identification)
+- **Google reCAPTCHA v2** (for detection of bots)
 - **Tailwind CSS** (for styling)
 - **Axios** (for data fetching)
 - **React-Cookie** (for browser cookie manipulation)
@@ -44,10 +46,11 @@ cd BlogOn
 ```
 
 3. Create a `.env` file in the project directory.
-4. Create a variable named `REACT_APP_API_URL` and set its value to [https://shm-blogapp-api.onrender.com](https://shm-blogapp-api.onrender.com)
+4. Create the follwing variables in the `.env` file:
 
 ```bash
 REACT_APP_API_URL = https://shm-blogapp-api.onrender.com
+REACT_APP_reCAPTCHA_SITE_KEY= <your Google reCAPTCHA v2 site key>
 ```
 
 5. In the project directory, you can run `npm install` to install the project dependencies.
@@ -74,3 +77,6 @@ This will launch the application on a local development server, typically at [ht
 4. **Delete Post** : A user when signed in, can also delete the posts that were created by the same user.
 5. **Edit Post** : A user can edit their posts by clicking on the 'Edit' button on the post card and can edit the title, summary, cover photo and the content of the blog.
 6. **My Profile** : A user can see their profile by clicking on the 'My Profile' button and can see all the posts created by them.
+7. **Human Identification**: Every registration is now checked with TensorFlow JS models if a user is a person or not.
+8. **Listen to Blog** : Now a user can listen to the blogs.
+9. **Detect Toxicity** : Every post is now checked for toxicity(eg: insult,obscene, sexual_explicit, etc )
