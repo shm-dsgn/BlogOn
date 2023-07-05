@@ -108,6 +108,7 @@ const WebcamCapture = (props: PredictionProps) => {
             <li>Make sure your face is clearly visible.</li>
             <li>Make sure there is no one else in the frame.</li>
             <li>Make sure there is enough light in the room.</li>
+            <li>No image is saved. This is just for verification and will not be used for other purposes.</li>
           </ul>
           <div className="flex justify-center gap-4">
             <button
