@@ -56,7 +56,7 @@ const RegisterPage = () => {
       });
       return;
     }
-    if (score < 0.9) {
+    if (score < 0.85) {
       toast.error("Identity Verification failed. Retry.", {
         autoClose: 1000,
         position: "top-center",
