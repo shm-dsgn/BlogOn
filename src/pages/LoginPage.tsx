@@ -17,41 +17,41 @@ const LoginPage = () => {
 
   const captchaRef: RefObject<any> = useRef();
   const SITE_KEY = process.env.REACT_APP_reCAPTCHA_SITE_KEY as string;
-  const SECRET_KEY = process.env.REACT_APP_reCAPTCHA_SECRET_KEY;
 
   const onSubmit = async (event: React.FormEvent<Element>) => {
     event.preventDefault();
 
-    let token = captchaRef.current.getValue();
+    let captchaToken = captchaRef.current.getValue();
     captchaRef.current.reset();
 
-    if (!token) {
+    if (!captchaToken) {
       toast.error("Please verify you are not a robot", {
         autoClose: 1000,
         position: "top-center",
       });
       return;
-    } else {
-      try {
-        await axios
-          .post(
-            // `${process.env.REACT_APP_API_URL}/auth/verify-captcha`,
-            // { token, SECRET_KEY },
-            `https://www.google.com/recaptcha/api/siteverify?secret=${SECRET_KEY}&response=${token}`
-          )
-          .then(function (response) {
-            if (!response.data.success) {
-              toast.error("Please verify you are not a robot", {
-                autoClose: 1000,
-                position: "top-center",
-              });
-              return;
-            }
-          });
-      } catch (err) {
-        console.error(err);
-      }
     }
+    // } else {
+    //   try {
+    //     await axios
+    //       .post(
+    //         // `${process.env.REACT_APP_API_URL}/auth/verify-captcha`,
+    //         // { token, SECRET_KEY },
+    //         `https://www.google.com/recaptcha/api/siteverify?secret=${SECRET_KEY}&response=${token}`
+    //       )
+    //       .then(function (response) {
+    //         if (!response.data.success) {
+    //           toast.error("Please verify you are not a robot", {
+    //             autoClose: 1000,
+    //             position: "top-center",
+    //           });
+    //           return;
+    //         }
+    //       });
+    //   } catch (err) {
+    //     console.error(err);
+    //   }
+    // }
 
     try {
       setSpinner(true);
@@ -59,6 +59,7 @@ const LoginPage = () => {
         .post(`${process.env.REACT_APP_API_URL}/auth/login`, {
           username,
           password,
+          captchaToken,
         })
         .then(function (response) {
           setSpinner(false);
