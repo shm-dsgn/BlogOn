@@ -105,8 +105,8 @@ const WebcamCapture = (props: PredictionProps) => {
         <div>
           <p className=" text-sm">Few points to remember:</p>
           <ul className="list-disc list-inside text-sm">
-            <li>Make sure your face is clearly visible.</li>
-            <li>Make sure there is no one else in the frame.</li>
+            <li>Make sure your face is clearly visible and there is a clean background.</li>
+            <li>Make sure there is no one/nothing else in the frame.</li>
             <li>Make sure there is enough light in the room.</li>
             <li>No image is saved. This is just for verification and will not be used for other purposes.</li>
           </ul>
