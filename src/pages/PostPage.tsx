@@ -11,7 +11,6 @@ import {
 } from "@phosphor-icons/react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useCookies } from "react-cookie";
 import Spinner from "../components/Spinner";
 import TextToSpeech from "../components/TextToSpeech";
 
@@ -37,10 +36,12 @@ const PostPage = () => {
   const navigate = useNavigate();
 
   const currentUserId = localStorage.getItem("userID");
-  // eslint-disable-next-line
-  const [cookies, _] = useCookies(["access_token"]);
   const [show, setShow] = useState(false);
-
+  const cookieValue = document.cookie
+  .split("; ")
+  .find((row) => row.startsWith("access_token_state="))
+  ?.split("=")[1];
+  
   useEffect(() => {
     try {
       const fetchPost = async () => {
@@ -65,7 +66,7 @@ const PostPage = () => {
     try {
       await axios
         .delete(`${process.env.REACT_APP_API_URL}/post/delete/${id}`, {
-          headers: { authorization: cookies.access_token },
+          withCredentials: true,
         })
         .then(function (response) {
           toast.success(response.data.message, {
@@ -110,7 +111,7 @@ const PostPage = () => {
             </Link>
 
             <div className="flex gap-3">
-              {currentUserId === post.author._id && cookies.access_token && (
+              {currentUserId === post.author._id && cookieValue && (
                 <>
                   <Link to={`/post/edit/${post._id}`}>
                     <button

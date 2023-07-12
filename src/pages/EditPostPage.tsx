@@ -5,7 +5,6 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useGetUserID } from "../hooks/useGetUserID";
-import { useCookies } from "react-cookie";
 import Spinner from "../components/Spinner";
 
 const EditPostPage = () => {
@@ -16,8 +15,6 @@ const EditPostPage = () => {
   const [savedCover, setSavedCover] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
-  // eslint-disable-next-line
-  const [cookies, _] = useCookies(["access_token"]);
   const [spinner, setSpinner] = useState(false);
 
   useEffect(() => {
@@ -56,7 +53,7 @@ const EditPostPage = () => {
     try {
       await axios
         .put(`${process.env.REACT_APP_API_URL}/post/edit`, data, {
-          headers: { authorization: cookies.access_token },
+          withCredentials: true,
         })
         .then(function (response) {
           setSpinner(false);

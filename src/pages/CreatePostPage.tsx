@@ -5,7 +5,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useGetUserID } from "../hooks/useGetUserID";
 import Editor from "../components/Editor";
-import { useCookies } from "react-cookie";
 import Spinner from "../components/Spinner";
 
 const CreatePostPage = () => {
@@ -14,8 +13,6 @@ const CreatePostPage = () => {
   const [content, setContent] = useState("");
   const [images, setImages] = useState<FileList | null>(null);
   const navigate = useNavigate();
-  // eslint-disable-next-line
-  const [cookies, _] = useCookies(["access_token"]);
   const [spinner, setSpinner] = useState(false);
 
   const CreatePost = async (e: React.FormEvent<Element>) => {
@@ -35,7 +32,7 @@ const CreatePostPage = () => {
     try {
       await axios
         .post(`${process.env.REACT_APP_API_URL}/post/create`, data, {
-          headers: { authorization: cookies.access_token },
+          withCredentials: true,
         })
         .then(function (response) {
           setSpinner(false);

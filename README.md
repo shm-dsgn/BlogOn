@@ -23,7 +23,6 @@ MERN Stack:
 - **Google reCAPTCHA v2** (for detection of bots)
 - **Tailwind CSS** (for styling)
 - **Axios** (for data fetching)
-- **React-Cookie** (for browser cookie manipulation)
 - **React-Toastify** (for showing Toast notification)
 - **React-Router-Dom** (for router functionalities)
 - **React-Quill** (for text editor)

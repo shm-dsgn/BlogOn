@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
-import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { FilePlus, SignOut, User } from "@phosphor-icons/react";
+import axios from "axios";
 import logo from "../logo.png";
 
 interface NavLinkProps {
@@ -15,16 +15,27 @@ const Header = () => {
     };
   };
 
-  const [cookies, setCookies] = useCookies(["access_token"]);
   const navigate = useNavigate();
   const userName = window.localStorage.getItem("userName");
   const userID = window.localStorage.getItem("userID");
+  const cookieValue = document.cookie
+  .split("; ")
+  .find((row) => row.startsWith("access_token_state="))
+  ?.split("=")[1];
+  // console.log(cookieValue);
 
   const logout = () => {
-    setCookies("access_token", "");
+    try{
+      axios.get(`${process.env.REACT_APP_API_URL}/auth/logout`, {
+        withCredentials: true,
+      })
+    } catch(err) {
+      console.error(err)
+    }
     window.localStorage.removeItem("userID");
     window.localStorage.removeItem("userName");
     navigate("/login");
+    navigate(0);
   };
 
   return (
@@ -36,7 +47,7 @@ const Header = () => {
         </NavLink>
       </h1>
       <nav className=" text-blue-500 flex gap-4">
-        {!cookies.access_token || cookies.access_token === undefined ? (
+        {!cookieValue || cookieValue===undefined ? (
           <>
             <NavLink
               title="Login"
