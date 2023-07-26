@@ -47,7 +47,9 @@ const PostPage = () => {
       const fetchPost = async () => {
         try {
           const response = await axios.get(
-            `${process.env.REACT_APP_API_URL}/post/${id}`
+            `${process.env.REACT_APP_API_URL}/post/${id}`, {
+              withCredentials: true,
+            }
           );
           setPost(response.data);
         } catch (err) {

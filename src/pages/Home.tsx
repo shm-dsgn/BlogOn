@@ -22,7 +22,9 @@ const Home = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/post`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/post`, {
+          withCredentials: true,
+        });
         setBlogs(response.data);
         setLoaded(true);
       } catch (err) {

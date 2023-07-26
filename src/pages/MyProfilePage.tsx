@@ -27,7 +27,9 @@ const MyPostsPage = () => {
       const fetchPost = async () => {
         try {
           const response = await axios.get(
-            `${process.env.REACT_APP_API_URL}/post/myprofile/${id}`
+            `${process.env.REACT_APP_API_URL}/post/myprofile/${id}`, {
+              withCredentials: true,
+            }
           );
           setMyPosts(response.data.myPosts);
           setUsername(response.data.username);
